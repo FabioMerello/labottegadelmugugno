@@ -64,7 +64,14 @@
     <!-- Form prenotazione -->
     <section class="contact-form" data-aos="fade-up">
         <h2>Prenota un tavolo</h2>
-        <form action="https://formspree.io/f/xjkolovn" method="POST">
+        <form action="https://api.web3forms.com/submit" method="POST">
+            <!-- Chiave Web3Forms -->
+            <input type="hidden" name="access_key" value="9708a7f8-09ee-48bc-8c87-2780ca8f5ee3">
+
+            <!-- Email di notifica -->
+            <input type="hidden" name="from_name" value="Prenotazioni BeautyTechService">
+            <input type="hidden" name="replyto" value="predarid@gmail.com">
+
             <div class="form-grid">
                 <input type="text" name="Nome" placeholder="Nome e Cognome" required>
                 <input type="tel" name="Telefono" placeholder="Telefono" required>
@@ -72,6 +79,7 @@
                 <input type="time" name="Ora" required>
                 <input type="number" name="Persone" placeholder="N. Persone" min="1" required>
             </div>
+
             <textarea name="Messaggio" rows="5" placeholder="Messaggi o richieste speciali..."></textarea>
 
             <label class="privacy-consent">
