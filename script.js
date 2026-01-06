@@ -110,3 +110,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const mapContainer2 = document.getElementById("map-container-2");
+
+    const MAP_IFRAME_2 = `
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2863.873418584938!2d8.2599499!3d44.127233!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d2f7c72ce2e4bb%3A0x6446d6da999f8cba!2sLa%20Bottega%20del%20Mugugno!5e0!3m2!1sit!2sit!4v1753451058925!5m2!1sit!2sit"
+            width="600"
+            height="450"
+            style="border:0;"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    `;
+
+    function loadMap2() {
+        if (mapContainer2) {
+            mapContainer2.innerHTML = MAP_IFRAME_2;
+        }
+    }
+
+    // Se consenso già dato, carica subito
+    if (localStorage.getItem("cookiesAccepted") === "true") {
+        loadMap2();
+    }
+});
