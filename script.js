@@ -112,6 +112,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+    const cookieBanner = document.getElementById("cookie-banner");
+    const acceptBtn = document.getElementById("accept-cookies");
+
+    // Mappa placeholder già esistente
     const mapContainer2 = document.getElementById("map-container-2");
 
     const MAP_IFRAME_2 = `
@@ -126,14 +130,55 @@ document.addEventListener("DOMContentLoaded", function () {
         </iframe>
     `;
 
+    // Funzione per caricare Google Maps
     function loadMap2() {
         if (mapContainer2) {
             mapContainer2.innerHTML = MAP_IFRAME_2;
         }
     }
 
-    // Se consenso già dato, carica subito
-    if (localStorage.getItem("cookiesAccepted") === "true") {
+    // Funzione per caricare risorse esterne
+    function loadExternalResources() {
+        // Carica Google Fonts
+        const googleFonts = document.createElement("link");
+        googleFonts.href = "https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap";
+        googleFonts.rel = "stylesheet";
+        document.head.appendChild(googleFonts);
+
+        // Carica Leaflet CSS
+        const leafletCSS = document.createElement("link");
+        leafletCSS.href = "https://unpkg.com/leaflet/dist/leaflet.css";
+        leafletCSS.rel = "stylesheet";
+        document.head.appendChild(leafletCSS);
+
+        // Carica Leaflet JS
+        const leafletJS = document.createElement("script");
+        leafletJS.src = "https://unpkg.com/leaflet/dist/leaflet.js";
+        document.body.appendChild(leafletJS);
+
+        // Carica Google Maps
         loadMap2();
     }
+
+    // Controllo se consenso già dato
+    if (localStorage.getItem("cookiesAccepted") === "true") {
+        loadExternalResources();
+    } else {
+        cookieBanner.classList.add("show");
+    }
+
+    // AOS JS
+    const aosJS = document.createElement("script");
+    aosJS.src = "https://unpkg.com/aos@2.3.4/dist/aos.js";
+    aosJS.onload = function() {
+        AOS.init(); // inizializza AOS solo dopo il caricamento
+    };
+    document.body.appendChild(aosJS);
+
+    // Click su OK
+    acceptBtn.addEventListener("click", function() {
+        localStorage.setItem("cookiesAccepted", "true");
+        cookieBanner.classList.remove("show");
+        loadExternalResources();
+    });
 });
